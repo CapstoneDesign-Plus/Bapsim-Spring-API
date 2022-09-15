@@ -1,10 +1,10 @@
-package com.bapsim.bapsimspring;
+package com.bapsim.springweb;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class BapsimSpringApplicationTests {
+class SpringwebApplicationTests {
 
 	@Test
 	void contextLoads() {
