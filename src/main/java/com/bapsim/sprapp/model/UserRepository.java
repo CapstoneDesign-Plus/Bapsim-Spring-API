@@ -1,2 +1,7 @@
-package com.bapsim.sprapp.model;public interface UserRepository {
+package com.bapsim.sprapp.model;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+
+public interface UserRepository extends MongoRepository<User, String> {
+
 }
