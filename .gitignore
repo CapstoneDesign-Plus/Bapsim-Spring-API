@@ -1,10 +1,10 @@
 HELP.md
 .gradle
+.DS_Store
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-.DS_Store
 
 ### STS ###
 .apt_generated
@@ -19,6 +19,7 @@ bin/
 !**/src/test/**/bin/
 
 ### IntelliJ IDEA ###
+application-db.properties
 .idea
 *.iws
 *.iml
@@ -36,3 +37,4 @@ out/
 
 ### VS Code ###
 .vscode/
+
