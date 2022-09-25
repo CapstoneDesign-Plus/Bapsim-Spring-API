@@ -3,10 +3,7 @@ package com.bapsim.sprapp.controller;
 import com.bapsim.sprapp.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -15,10 +12,25 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping(value = "/all")
+    // GetMapping
+
+    @GetMapping(value = "/page")
     @ResponseBody
-    public Object getAllUsers(){
+    public Object page(){
         return userService.getAllUsers();
+    }
+
+    @GetMapping(value = "/search")
+    @ResponseBody
+    public Object search() {
+        return null;
+    }
+
+    @GetMapping(value = "/history")
+    @ResponseBody
+    public Object getHistory() {
+
+        return null;
     }
 
     @GetMapping(value = "/{email}")
@@ -27,6 +39,34 @@ public class UserController {
         UserDTO userDTO = new UserDTO();
         userDTO.setEmail(email);
         return userDTO;
+    }
+
+    // Post Mapping
+
+    @PostMapping(value = "/auth")
+    @ResponseBody
+    public Object auth() {
+        return null;
+    }
+
+    @PostMapping(value = "/register")
+    @ResponseBody
+    public Object register() {
+        return null;
+    }
+
+    // Put Mapping
+
+    @PutMapping(value = "/username")
+    @ResponseBody
+    public Object changeUsername() {
+        return null;
+    }
+
+    @PutMapping(value = "/password")
+    @ResponseBody
+    public Object changePassword() {
+        return null;
     }
 }
 
