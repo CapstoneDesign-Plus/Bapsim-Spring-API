@@ -1,5 +1,7 @@
 package com.bapsim.sprapp.controller;
 
+import com.bapsim.sprapp.model.Ticket;
+import com.bapsim.sprapp.service.TicketService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/ticket")
 @AllArgsConstructor
 public class TicketController {
+
+    private final TicketService ticketService;
 
     // Get Mapping
 
@@ -40,8 +44,18 @@ public class TicketController {
 
     @PostMapping(value = "/create")
     @ResponseBody
-    public Object createTicket() {
-        return null;
+    public Ticket createTicket(/* @RequestBody Object value */) {
+
+        Ticket ticket = new Ticket(
+                (long) -1,
+                "me",
+                Ticket.TicketClass.A,
+                Ticket.TicketState.Normal,
+                100,
+                null
+        );
+
+        return ticketService.insert(ticket);
     }
 
     // Put Mapping
