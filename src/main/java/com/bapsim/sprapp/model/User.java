@@ -3,6 +3,7 @@ package com.bapsim.sprapp.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -22,5 +23,6 @@ public class User {
     private int uclass;
     private int point;
     private List<String> tickets;
+    @CreatedDate
     private LocalDateTime createdAt;
 }
