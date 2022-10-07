@@ -8,6 +8,8 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -38,10 +40,33 @@ public class UserService {
     }
 
     /**
+     * Register (Sign up) user with given data.
+     * @param username
+     * @param password
+     * @param email identifier of user
+     * @return return {@code true} if successes, otherwise {@code false},
+     */
+    public boolean register(String username, String password, String email) {
+        User user = new User(
+                email,
+                username,
+                password,
+                false,
+                0,
+                0,
+                new ArrayList<>(),
+                LocalDateTime.now()
+        );
+
+        userRepository.insert(user);
+        return true;
+    }
+
+    /**
      * Find user by email and change username.
      * @param userEmail identifier of user
      * @param newUsername
-     * @return return {@code true} if successed, otherwise {@code false}.
+     * @return return {@code true} if successes, otherwise {@code false}.
      */
     public boolean changeUsername(String userEmail, String newUsername) {
             User user = this.getUserByEmail(userEmail);

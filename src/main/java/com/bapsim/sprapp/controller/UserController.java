@@ -53,8 +53,13 @@ public class UserController {
 
     @PostMapping(value = "/register")
     @ResponseBody
-    public Object register() {
-        return null;
+    public Object register(@RequestBody Map<String, String> body) {
+        String username = body.get("username");
+        String password = body.get("password");
+        String email = body.get("email");
+
+        boolean result = userService.register(username, password, email);
+        return result;
     }
 
     // Put Mapping
