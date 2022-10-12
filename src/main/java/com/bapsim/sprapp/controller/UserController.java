@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -22,10 +23,15 @@ public class UserController {
     @GetMapping(value = "/list")
     @ResponseBody
     public List<UserDTO> page(@RequestParam Map<String, String> query){
-        return userService.getUserPage(
-                Integer.parseInt(query.get("page")),
-                Integer.parseInt(query.get("per"))
-        );
+        try {
+            return userService.getUserPage(
+                    Integer.parseInt(query.get("page")),
+                    Integer.parseInt(query.get("per"))
+            );
+        }
+        catch (NumberFormatException e){
+            return Collections.emptyList();
+        }
     }
 
     @GetMapping(value = "/search")

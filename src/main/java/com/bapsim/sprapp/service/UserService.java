@@ -10,10 +10,7 @@ import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -43,7 +40,19 @@ public class UserService {
 
     public UserDTO getUserDTOByEmail(String email) { return getUserByEmail(email).toUserDTO(); }
 
+    /**
+     * get UserDTOs split by given interval.
+     * @param pageNo
+     * @param interval number of users per page
+     * @return List of UserDTO searched.
+     * if pageNo or interval is illegal, return {@code {@link Collections#emptySet()}}.
+     */
     public List<UserDTO> getUserPage(int pageNo, int interval) {
+        if (pageNo < 1)
+            return Collections.emptyList();
+        if (interval < 1)
+            return Collections.emptyList();
+
         return userRepository.findAll().stream()
                 .skip((pageNo - 1) * interval)
                 .limit(interval)
