@@ -27,6 +27,12 @@ public class User {
     private LocalDateTime createdAt;
 
     public UserDTO toUserDTO() {
-        return null; // TODO
+        return new UserDTO(
+                this.email,
+                this.username,
+                this.uclass,
+                this.point,
+                this.tickets
+        );
     }
 }
