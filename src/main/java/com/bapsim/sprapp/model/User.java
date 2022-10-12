@@ -25,4 +25,8 @@ public class User {
     private List<String> tickets;
     @CreatedDate
     private LocalDateTime createdAt;
+
+    public UserDTO toUserDTO() {
+        return null; // TODO
+    }
 }

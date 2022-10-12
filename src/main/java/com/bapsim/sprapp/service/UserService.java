@@ -1,6 +1,7 @@
 package com.bapsim.sprapp.service;
 
 import com.bapsim.sprapp.model.User;
+import com.bapsim.sprapp.model.UserDTO;
 import com.bapsim.sprapp.model.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -39,6 +41,15 @@ public class UserService {
         return userRepository.findById(email).orElse(null);
     }
 
+    public UserDTO getUserDTOByEmail(String email) { return getUserByEmail(email).toUserDTO(); }
+
+    public List<UserDTO> getUserPage(int pageNo, int interval) {
+        return userRepository.findAll().stream()
+                .skip((pageNo - 1) * interval)
+                .limit(interval)
+                .map(User::toUserDTO)
+                .collect(Collectors.toList());
+    }
     /**
      * Register (Sign up) user with given data.
      * @param username

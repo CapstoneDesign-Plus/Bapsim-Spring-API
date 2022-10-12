@@ -1,10 +1,13 @@
 package com.bapsim.sprapp.controller;
 
+import com.bapsim.sprapp.model.User;
+import com.bapsim.sprapp.model.UserDTO;
 import com.bapsim.sprapp.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -16,10 +19,13 @@ public class UserController {
 
     // GetMapping
 
-    @GetMapping(value = "/page")
+    @GetMapping(value = "/list")
     @ResponseBody
-    public Object page(){
-        return userService.getAllUsers();
+    public List<UserDTO> page(@RequestParam Map<String, String> query){
+        return userService.getUserPage(
+                Integer.parseInt(query.get("page")),
+                Integer.parseInt(query.get("per"))
+        );
     }
 
     @GetMapping(value = "/search")
@@ -38,9 +44,7 @@ public class UserController {
     @GetMapping(value = "/{email}")
     @ResponseBody
     public UserDTO getUserByEmail(@PathVariable("email") String email) {
-        UserDTO userDTO = new UserDTO();
-        userDTO.setEmail(email);
-        return userDTO;
+        return userService.getUserDTOByEmail(email);
     }
 
     // Post Mapping
@@ -81,12 +85,3 @@ public class UserController {
     }
 }
 
-class UserDTO {
-    private String email;
-
-    public void setEmail(String email) {this.email = email;}
-
-    public String getEmail(){
-        return this.email;
-    }
-}
